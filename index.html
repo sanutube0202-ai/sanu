@@ -71,9 +71,11 @@
 
   function drawMonth(ox,oy,bw,bh,y,m){
     const h=hol(y), cols=7, colW=bw/cols;
-    // month number — horizontal, spaced, top-left (like the reference)
+    // month number — horizontal, spaced, centered over the grid (like the Canva)
     ctx.textAlign='left'; ctx.textBaseline='alphabetic'; ctx.fillStyle=C.ink; ctx.font='300 132px '+SF;
-    ctx.letterSpacing='0.2em'; ctx.fillText(String(m).padStart(2,'0'), ox+8, oy+112); ctx.letterSpacing='0px';
+    const _mt=String(m).padStart(2,'0'); ctx.letterSpacing='0px';
+    const _mw=ctx.measureText(_mt).width+(_mt.length-1)*132*0.2;  // 字間込みの見た目の幅
+    ctx.letterSpacing='0.2em'; ctx.fillText(_mt, ox+(bw-_mw)/2, oy+112); ctx.letterSpacing='0px';
     // weekday header — Mon-start English, Sunday accent
     ctx.textAlign='center'; ctx.font='400 42px '+SF; const headY=oy+232;
     for(let c=0;c<cols;c++){const wd=(state.weekStart+c)%7; ctx.fillStyle=wd===0?C.accent:C.grey; ctx.fillText(WK[wd], ox+colW*c+colW/2, headY);}

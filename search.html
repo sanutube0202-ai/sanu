@@ -82,8 +82,9 @@
 
   .card{background:var(--surface); border:1px solid var(--hair); border-radius:20px; padding:16px; margin-bottom:15px; box-shadow:0 4px 16px rgba(0,40,80,.05); opacity:0; animation:rise .32s both}
   .chead{display:flex; gap:13px; align-items:flex-start}
+  .chead>div{flex:1; min-width:0}
   .thumb{width:122px; flex:0 0 122px; aspect-ratio:16/9; object-fit:cover; border-radius:13px; background:var(--mist); display:block}
-  .ctitle{font-family:var(--jp); font-weight:700; font-size:15px; line-height:1.42; color:var(--ink); text-decoration:none}
+  .ctitle{font-family:var(--jp); font-weight:700; font-size:15px; line-height:1.42; color:var(--ink); text-decoration:none; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
   .ctitle:hover{color:var(--blue)}
   .cmeta{font-family:var(--mono); font-size:10.5px; letter-spacing:.04em; color:var(--slate); text-transform:uppercase; margin-top:7px}
   .rule{height:1px; background:var(--hair); margin:14px 0}
@@ -366,7 +367,7 @@
     if($('#q').value.trim()) run($('#q').value);
   }
 
-  const chips=['ロースコグ','ライト','収納','クジラ'];
+  const chips=['ロースコグ','ライト','収納','ミッケ'];
   $('#chips').innerHTML=chips.map(c=>'<button class="chip">'+c+'</button>').join('');
   $('#chips').addEventListener('click',e=>{ if(e.target.classList.contains('chip')){ $('#q').value=e.target.textContent; go(); } });
   $('#lang').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; lang=b.dataset.l; try{localStorage.setItem('sanu_lang',lang);}catch(_){} applyLang(); });
